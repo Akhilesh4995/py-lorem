@@ -2,7 +2,7 @@ steps:
   - label: "run-loremipsum-sentence-and-save-to-result-txt"
     command: |
       pip install loremipsum
-      python -c "import loremipsum; sentence = loremipsum.sentence(max_char=20); print(sentence); open('result.txt', 'w') as f: f.write(sentence)"
+      python -c "import loremipsum; sentence = loremipsum.sentence(max_char=20); print(sentence); open('result.txt', 'w').write(sentence)"
     plugins:
       - docker#v3.9.0:
           image: "python:3.13"
@@ -20,7 +20,7 @@ steps:
   - label: "run-loremipsum-paragraph-and-annotate"
     command: |
       pip install loremipsum
-      python -c "import loremipsum; paragraph = loremipsum.paragraph(max_char=100); print(paragraph); open('result_paragraph.txt', 'w') as f: f.write(paragraph)"
+      python -c "import loremipsum; paragraph = loremipsum.paragraph(max_char=100); print(paragraph); open('result_paragraph.txt', 'w').write(paragraph)"
     depends_on: "annotate-with-result-from-result-txt"
     plugins:
       - docker#v3.9.0:
