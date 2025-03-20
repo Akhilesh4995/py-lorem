@@ -6,6 +6,8 @@ steps:
     plugins:
       - docker#v3.9.0:
           image: "python:3.13"
+          volumes:
+            - /tmp/assessment:/container/path
 
   - label: "annotate-with-result-from-result-txt"
     command: |
