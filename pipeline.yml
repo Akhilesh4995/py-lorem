@@ -9,6 +9,7 @@ steps:
           image: "python:3.13"
           volumes:
             - /tmp/assessment:/container/path
+          mount-buildkite-agent: true
 
   - label: "annotate-with-result-from-result-txt"
     key: "step-2"
