@@ -14,7 +14,7 @@ steps:
   - label: "annotate-with-result-from-result-txt"
     key: "step-2"
     command: |
-      buildkite-agent annotate --file result.txt
+      cat result.txt | buildkite-agent annotate --style "success"
     depends_on: "step-1"
 
   - label: "run-loremipsum-paragraph-and-annotate"
@@ -29,5 +29,5 @@ steps:
 
   - label: "annotate-with-paragraph-result"
     command: |
-      buildkite-agent annotate --file result_paragraph.txt
+      cat result_paragraph.txt | buildkite-agent annotate --style "success"
     depends_on: "step-3"
