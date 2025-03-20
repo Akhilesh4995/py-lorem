@@ -1,5 +1,5 @@
 steps:
-  - label: "Run loremipsum_sentence and Save to result_txt"
+  - label: "Run-loremipsum_sentence-and-Save-to-result_txt"
     command: |
       pip install loremipsum
       python -c "import loremipsum; sentence = loremipsum.sentence(max_char=20); print(sentence); with open('result.txt', 'w') as f: f.write(sentence)"
@@ -7,7 +7,7 @@ steps:
       - docker#v3.9.0:
           image: "python:3.13"
 
-  - label: "Annotate with Result from result_txt"
+  - label: "Annotate-with-Result-from-result_txt"
     command: |
       buildkite-agent annotate --file result.txt
     depends_on: "Run loremipsum.sentence and Save to result.txt"
@@ -15,7 +15,7 @@ steps:
       - docker#v3.9.0:
           image: "python:3.13"
 
-  - label: "Run loremipsum_paragraph and Annotate"
+  - label: "Run-loremipsum_paragrap-and-Annotate"
     command: |
       pip install loremipsum
       python -c "import loremipsum; paragraph = loremipsum.paragraph(max_char=100); print(paragraph); with open('result_paragraph.txt', 'w') as f: f.write(paragraph)"
@@ -24,7 +24,7 @@ steps:
       - docker#v3.9.0:
           image: "python:3.13"
 
-  - label: "Annotate with Paragraph Result"
+  - label: "Annotate-with-Paragraph-Result"
     command: |
       buildkite-agent annotate --file result_paragraph.txt
     depends_on: "Run loremipsum.paragraph and Annotate"
