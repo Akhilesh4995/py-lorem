@@ -1,28 +1,32 @@
 steps:
   - label: "Run loremipsum.sentence and Save to result.txt"
-    command: python -c "import loremipsum; sentence = loremipsum.sentence(max_char=20); print(sentence); with open('result.txt', 'w') as f: f.write(sentence)"
+    command: |
+      pip install loremipsum
+      python -c "import loremipsum; sentence = loremipsum.sentence(max_char=20); print(sentence); with open('result.txt', 'w') as f: f.write(sentence)"
     plugins:
       - docker#v3.9.0:
           image: "python:3.13"
-          run: python -c "import loremipsum; sentence = loremipsum.sentence(max_char=20); print(sentence); with open('result.txt', 'w') as f: f.write(sentence)"
-          
+
   - label: "Annotate with Result from result.txt"
-    command: buildkite-agent annotate --file result.txt
+    command: |
+      buildkite-agent annotate --file result.txt
     depends_on: "Run loremipsum.sentence and Save to result.txt"
     plugins:
       - docker#v3.9.0:
           image: "python:3.13"
-          
+
   - label: "Run loremipsum.paragraph and Annotate"
-    command: python -c "import loremipsum; paragraph = loremipsum.paragraph(max_char=100); print(paragraph); with open('result_paragraph.txt', 'w') as f: f.write(paragraph)"
+    command: |
+      pip install loremipsum
+      python -c "import loremipsum; paragraph = loremipsum.paragraph(max_char=100); print(paragraph); with open('result_paragraph.txt', 'w') as f: f.write(paragraph)"
     depends_on: "Annotate with Result from result.txt"
     plugins:
       - docker#v3.9.0:
           image: "python:3.13"
-          run: python -c "import loremipsum; paragraph = loremipsum.paragraph(max_char=100); print(paragraph); with open('result_paragraph.txt', 'w') as f: f.write(paragraph)"
-          
+
   - label: "Annotate with Paragraph Result"
-    command: buildkite-agent annotate --file result_paragraph.txt
+    command: |
+      buildkite-agent annotate --file result_paragraph.txt
     depends_on: "Run loremipsum.paragraph and Annotate"
     plugins:
       - docker#v3.9.0:
