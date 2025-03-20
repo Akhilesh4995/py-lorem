@@ -16,9 +16,6 @@ steps:
     command: |
       buildkite-agent annotate --file result.txt
     depends_on: "step-1"
-    plugins:
-      - docker#v3.9.0:
-          image: "python:3.13"
 
   - label: "run-loremipsum-paragraph-and-annotate"
     key: "step-3"
@@ -34,6 +31,3 @@ steps:
     command: |
       buildkite-agent annotate --file result_paragraph.txt
     depends_on: "step-3"
-    plugins:
-      - docker#v3.9.0:
-          image: "python:3.13"
