@@ -1,5 +1,5 @@
 steps:
-  - label: "run-loremipsum-sentence-and-save-to-result-txt"
+  - label: "step-1"
     command: |
       pip install loremipsum
       python -c "import loremipsum; sentence = loremipsum.sentence(max_char=20); print(sentence); open('result.txt', 'w').write(sentence)"
@@ -12,7 +12,7 @@ steps:
   - label: "annotate-with-result-from-result-txt"
     command: |
       buildkite-agent annotate --file result.txt
-    depends_on: "run-loremipsum-sentence-and-save-to-result-txt"
+    depends_on: "step-1"
     plugins:
       - docker#v3.9.0:
           image: "python:3.13"
