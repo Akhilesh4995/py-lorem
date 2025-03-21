@@ -10,13 +10,13 @@ steps:
           volumes:
             - /tmp/assessment:/container/path
           mount-buildkite-agent: true
+    artifact_paths: "result.txt"
 
   - label: "annotate-with-result-from-result-txt"
     key: "step-2"
     command: |
       cat result.txt | buildkite-agent annotate --style "success"
     depends_on: "step-1"
-    artifact_paths: "result.txt"
 
   - label: "run-loremipsum-paragraph-and-annotate"
     key: "step-3"
