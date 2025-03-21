@@ -17,6 +17,7 @@ steps:
     command: |
       cat result.txt | buildkite-agent annotate --style "success"
     depends_on: "step-1"
+    artifact_paths: "result.txt"
 
   - label: "run-loremipsum-paragraph-and-annotate"
     key: "step-3"
