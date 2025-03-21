@@ -18,7 +18,6 @@ steps:
       buildkite-agent artifact download "result.txt" .
       cat result.txt | buildkite-agent annotate --style "success"
     depends_on: "step-1"
-    artifact_paths: "result.txt"
 
   - label: "run-loremipsum-paragraph-and-annotate"
     key: "step-3"
@@ -29,8 +28,10 @@ steps:
     plugins:
       - docker#v3.9.0:
           image: "python:3.13"
+    artifact_paths: "paragraph.txt"
 
   - label: "annotate-with-paragraph-result"
     command: |
+      buildkite-agent artifact download "paragraph.txt" .
       cat result_paragraph.txt | buildkite-agent annotate --style "success"
     depends_on: "step-3"
