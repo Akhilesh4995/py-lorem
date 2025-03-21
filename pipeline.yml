@@ -28,10 +28,10 @@ steps:
     plugins:
       - docker#v3.9.0:
           image: "python:3.13"
-    artifact_paths: "paragraph.txt"
+    artifact_paths: "result_paragraph.txt"
 
   - label: "annotate-with-paragraph-result"
     command: |
-      buildkite-agent artifact download "paragraph.txt" .
+      buildkite-agent artifact download "result_paragraph.txt" .
       cat result_paragraph.txt | buildkite-agent annotate --style "success"
     depends_on: "step-3"
