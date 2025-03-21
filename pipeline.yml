@@ -15,7 +15,7 @@ steps:
   - label: "annotate-with-result-from-result-txt"
     key: "step-2"
     command: |
-      cat result.txt | buildkite-agent annotate --style "success"
+      cat artifact://result.txt | buildkite-agent annotate --style "success"
     depends_on: "step-1"
     artifact_paths: "result.txt"
 
